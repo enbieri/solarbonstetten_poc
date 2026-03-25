@@ -2,15 +2,15 @@ backend:
   name: github
   repo: enbieri/solarbonstetten_poc
   branch: main
-media_folder: src/assets
-public_folder: /src/assets
+media_folder: public/images
+public_folder: /images
 collections:
   - name: news
     label: News
     folder: src/content/news
     create: true
-    media_folder: /src/assets/news
-    public_folder: ../../assets/news
+    media_folder: public/images/news
+    public_folder: /images/news
     fields:
       - { label: Titel, name: title, widget: string }
       - { label: Datum, name: date, widget: datetime }
