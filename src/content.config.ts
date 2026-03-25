@@ -54,4 +54,13 @@ const statuten = defineCollection({
   }),
 });
 
-export const collections = { news, projekte, solaranlagen, links, statuten };
+const derVerein = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/der-verein' }),
+  schema: z.object({
+    title: z.string(),
+    untertitel: z.string(),
+    gruendungsdatum: z.string(),
+  }),
+});
+
+export const collections = { news, projekte, solaranlagen, links, statuten, derVerein };
