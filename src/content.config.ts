@@ -34,4 +34,15 @@ const solaranlagen = defineCollection({
   }),
 });
 
-export const collections = { news, projekte, solaranlagen };
+const links = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/links' }),
+  schema: z.object({
+    title: z.string(),
+    beschreibung: z.string(),
+    url: z.string().url(),
+    kategorie: z.string(),
+    reihenfolge: z.number(),
+  }),
+});
+
+export const collections = { news, projekte, solaranlagen, links };

@@ -1,0 +1,143 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const alleLinks = await getCollection('links');
+
+// Gruppieren nach Kategorie, innerhalb jeder Gruppe nach Reihenfolge sortieren
+const kategorien = [
+  'Behörden & Verbände',
+  'Umwelt & Nachhaltigkeit',
+  'Energie & Solar',
+  'Region & Gemeinde',
+];
+
+const kategorieIcons: Record<string, string> = {
+  'Behörden & Verbände': '🏛️',
+  'Umwelt & Nachhaltigkeit': '🌱',
+  'Energie & Solar': '☀️',
+  'Region & Gemeinde': '📍',
+};
+
+const gruppiertLinks = kategorien.map(kat => ({
+  name: kat,
+  icon: kategorieIcons[kat],
+  links: alleLinks
+    .filter(l => l.data.kategorie === kat)
+    .sort((a, b) => a.data.reihenfolge - b.data.reihenfolge),
+})).filter(g => g.links.length > 0);
+---
+<BaseLayout title="Links" description="Nützliche Links rund um Solarenergie, Umwelt und die Region Bonstetten.">
+
+  <div class="page-hero">
+    <div class="hero-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+    </div>
+    <div class="container">
+      <span class="badge">Weiterführende Infos</span>
+      <h1>Links</h1>
+      <p class="lead">Nützliche Links rund um Solarenergie, Umwelt und die Region Bonstetten.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="links-grid">
+        {gruppiertLinks.map(gruppe => (
+          <div class="link-gruppe">
+            <h2 class="gruppe-titel">
+              <span class="gruppe-icon">{gruppe.icon}</span>
+              {gruppe.name}
+            </h2>
+            <ul class="link-liste">
+              {gruppe.links.map(link => (
+                <li>
+                  <a href={link.data.url} target="_blank" rel="noopener noreferrer" class="link-card">
+                    <div class="link-card-content">
+                      <span class="link-title">{link.data.title}</span>
+                      <span class="link-desc">{link.data.beschreibung}</span>
+                      <span class="link-url">{link.data.url.replace(/^https?:\/\/(www\.)?/, '')}</span>
+                    </div>
+                    <span class="link-arrow">→</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-hero {
+    position: relative;
+    padding: 11rem 0 5rem;
+    overflow: hidden;
+  }
+  .page-hero h1 { font-size: 2.75rem; margin-bottom: 1rem; }
+  .page-hero .lead { font-size: 1.125rem; color: var(--color-text-light); max-width: 560px; }
+
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+
+  .link-gruppe { display: flex; flex-direction: column; gap: 1rem; }
+
+  .gruppe-titel {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+  .gruppe-icon { font-size: 1.4rem; }
+
+  .link-liste { display: flex; flex-direction: column; gap: 0.75rem; }
+
+  .link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-radius: var(--border-radius);
+    border: 1px solid #f1f5f9;
+    background: var(--color-background);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+  .link-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+    transform: translateX(4px);
+  }
+  .link-card-content { display: flex; flex-direction: column; gap: 0.2rem; overflow: hidden; }
+  .link-title { font-weight: 600; color: var(--color-secondary); font-size: 0.95rem; }
+  .link-desc { font-size: 0.85rem; color: var(--color-text-light); }
+  .link-url {
+    font-size: 0.75rem;
+    color: var(--color-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .link-arrow {
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    flex-shrink: 0;
+    transition: var(--transition);
+  }
+  .link-card:hover .link-arrow { transform: translateX(4px); }
+
+  @media (max-width: 768px) {
+    .links-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>

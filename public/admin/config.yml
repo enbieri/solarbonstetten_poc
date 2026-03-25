@@ -37,3 +37,20 @@ collections:
       - { label: Module, name: module, widget: string }
       - { label: Monitoring URL, name: monitoring_url, widget: string, required: false }
       - { label: Zusatzinfos, name: body, widget: markdown, required: false }
+  - name: links
+    label: Links
+    folder: src/content/links
+    create: true
+    fields:
+      - { label: Titel, name: title, widget: string }
+      - { label: Beschreibung, name: beschreibung, widget: string }
+      - { label: URL, name: url, widget: string }
+      - label: Kategorie
+        name: kategorie
+        widget: select
+        options:
+          - Behörden & Verbände
+          - Umwelt & Nachhaltigkeit
+          - Energie & Solar
+          - Region & Gemeinde
+      - { label: Reihenfolge, name: reihenfolge, widget: number, default: 99 }
