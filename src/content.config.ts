@@ -14,6 +14,7 @@ const projekte = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projekte' }),
   schema: z.object({
     title: z.string(),
+    image: z.string().optional(),
   }),
 });
 

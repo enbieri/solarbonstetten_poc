@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import '../styles/global.css';
+import logo from '../assets/logo.png';
 
 interface Props {
   title: string;
@@ -25,7 +27,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <header class="navbar" id="navbar">
       <div class="nav-container">
         <a href={`${base}/`} class="logo-link">
-          <img src={`${base}/images/logo.png`} alt="solarbonstetten Logo" class="logo" />
+          <Image src={logo} alt="solarbonstetten Logo" class="logo" height={48} />
         </a>
         <nav class="nav-links">
           <a href={`${base}/#aktuell`} class="nav-item">Aktuell</a>
@@ -47,7 +49,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <footer class="footer">
       <div class="container footer-grid">
         <div class="footer-brand">
-          <img src={`${base}/images/logo.png`} alt="solarbonstetten Logo" class="footer-logo" />
+          <Image src={logo} alt="solarbonstetten Logo" class="footer-logo" height={64} />
           <p>Mit lokal produziertem Strom in eine nachhaltige und unabhängige Zukunft für Bonstetten.</p>
         </div>
         <div class="footer-links">

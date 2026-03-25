@@ -19,7 +19,15 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <div class="container">
       <span class="news-date">{article.data.date.toLocaleDateString('de-CH', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
       <h1>{article.data.title}</h1>
-      {article.data.image && <img src={article.data.image} alt={article.data.title} style="max-width:100%;border-radius:12px;margin:1.5rem 0;" />}
+      {article.data.image && (
+        <img
+          src={article.data.image}
+          alt={article.data.title}
+          loading="lazy"
+          decoding="async"
+          style="max-width:100%;border-radius:12px;margin:1.5rem 0;height:auto;"
+        />
+      )}
       <div class="article-body">
         <Content />
       </div>
