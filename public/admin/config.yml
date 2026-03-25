@@ -55,6 +55,17 @@ collections:
           - Energie & Solar
           - Region & Gemeinde
       - { label: Reihenfolge, name: reihenfolge, widget: number, default: 99 }
+  - name: der-verein
+    label: Der Verein
+    files:
+      - label: Der Verein (Seite)
+        name: der-verein
+        file: src/content/der-verein/der-verein.md
+        fields:
+          - { label: Titel, name: title, widget: string }
+          - { label: Untertitel, name: untertitel, widget: string }
+          - { label: Gründungsdatum, name: gruendungsdatum, widget: string }
+          - { label: Inhalt, name: body, widget: markdown }
   - name: statuten
     label: Statuten
     files:
