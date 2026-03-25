@@ -15,7 +15,7 @@ POC for Solarbonstetten Hosting – built with [Astro](https://astro.build) and 
 
 ## ✏️ CMS – Sveltia CMS
 
-Der Inhalt wird über [Sveltia CMS](https://github.com/sveltia/sveltia-cms) verwaltet (Drop-in-Ersatz für Decap CMS).
+Der Inhalt wird über [Sveltia CMS](https://github.com/sveltia/sveltia-cms) verwaltet.
 
 **Admin-URL:** https://poc.solarbonstetten.ch/admin/
 
