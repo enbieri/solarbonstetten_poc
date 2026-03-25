@@ -21,16 +21,22 @@ Der Inhalt wird über [Sveltia CMS](https://github.com/sveltia/sveltia-cms) verw
 
 ### Einloggen (GitHub Token)
 
-Da die Site auf GitHub Pages gehostet wird (kein Netlify-OAuth-Server), erfolgt der Login über ein **GitHub Personal Access Token**:
+Da die Site auf GitHub Pages gehostet wird (kein Netlify-OAuth-Server), erfolgt der Login über ein **Fine-grained Personal Access Token** – dieser erlaubt den Zugriff gezielt auf ein einzelnes Repository.
 
-1. Token erstellen: [github.com/settings/tokens](https://github.com/settings/tokens)
-   - Typ: **Token (classic)**
-   - Scope: **`repo`** aktivieren
-   - Token kopieren
+**1. Token erstellen:** [github.com/settings/tokens?type=beta](https://github.com/settings/tokens?type=beta)
 
-2. Admin öffnen: https://poc.solarbonstetten.ch/admin/
+- **Token name:** z. B. `sveltia-cms-solarbonstetten`
+- **Expiration:** nach Bedarf wählen
+- **Resource owner:** `enbieri`
+- **Repository access:** → **Only select repositories** → `solarbonstetten_poc` auswählen
+- **Permissions → Repository permissions:**
+  - `Contents` → **Read and write**
+  - `Metadata` → **Read-only** (wird automatisch gesetzt)
+- Token generieren und kopieren
 
-3. **„Sign In with GitHub Using Token"** klicken und Token einfügen.
+**2. Admin öffnen:** https://poc.solarbonstetten.ch/admin/
+
+**3.** **„Sign In with GitHub Using Token"** klicken und Token einfügen.
 
 > **Hinweis:** Den Button „Sign In with GitHub" (ohne Token) **nicht** verwenden – dieser öffnet ein Netlify-OAuth-Fenster, das für diese Konfiguration nicht funktioniert.
 
