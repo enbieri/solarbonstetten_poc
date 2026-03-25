@@ -7,8 +7,8 @@ const latestNews = (await getCollection('news'))
   .slice(0, 3);
 
 const latestProjekte = (await getCollection('projekte')).slice(0, 3);
-
 const gradients = ['bg-gradient-1', 'bg-gradient-2', 'bg-gradient-3'];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <BaseLayout title="Erneuerbare Energien lokal">
 
@@ -86,14 +86,14 @@ const gradients = ['bg-gradient-1', 'bg-gradient-2', 'bg-gradient-3'];
               <div class="card-content">
                 <span class="news-date">{article.data.date.toLocaleDateString('de-CH', { month: 'long', year: 'numeric' })}</span>
                 <h3>{article.data.title}</h3>
-                <a href={`/news/${article.id}`} class="read-more">Artikel lesen →</a>
+                <a href={`${base}/news/${article.id}`} class="read-more">Artikel lesen →</a>
               </div>
             </article>
           ))}
         </div>
       )}
       <div class="text-center mt-2">
-        <a href="/news" class="btn btn-secondary">Alle News</a>
+        <a href={`${base}/news`} class="btn btn-secondary">Alle News</a>
       </div>
     </div>
   </section>
@@ -153,13 +153,13 @@ const gradients = ['bg-gradient-1', 'bg-gradient-2', 'bg-gradient-3'];
               <div class={`card-image ${gradients[i % 3]}`}></div>
               <div class="card-content">
                 <h3>{projekt.data.title}</h3>
-                <a href={`/projekte/${projekt.id}`} class="read-more">Mehr erfahren →</a>
+                <a href={`${base}/projekte/${projekt.id}`} class="read-more">Mehr erfahren →</a>
               </div>
             </article>
           ))}
         </div>
         <div class="text-center mt-2">
-          <a href="/projekte" class="btn btn-secondary">Alle Projekte</a>
+          <a href={`${base}/projekte`} class="btn btn-secondary">Alle Projekte</a>
         </div>
       </div>
     </section>

@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const projekte = await getCollection('projekte');
 const gradients = ['bg-gradient-1', 'bg-gradient-2', 'bg-gradient-3'];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <BaseLayout title="Projekte">
   <div class="content-page">
@@ -19,7 +20,7 @@ const gradients = ['bg-gradient-1', 'bg-gradient-2', 'bg-gradient-3'];
               <div class={`card-image ${gradients[i % 3]}`}></div>
               <div class="card-content">
                 <h3>{projekt.data.title}</h3>
-                <a href={`/projekte/${projekt.id}`} class="read-more">Mehr erfahren →</a>
+                <a href={`${base}/projekte/${projekt.id}`} class="read-more">Mehr erfahren →</a>
               </div>
             </article>
           ))}
