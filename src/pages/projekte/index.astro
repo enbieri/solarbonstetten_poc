@@ -3,17 +3,28 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const projekte = await getCollection('projekte');
+const gradients = ['bg-gradient-1', 'bg-gradient-2', 'bg-gradient-3'];
 ---
 <BaseLayout title="Projekte">
-  <h1>Projekte</h1>
-  {projekte.length === 0 && <p>Noch keine Projekte vorhanden.</p>}
-  <ul>
-    {projekte.map((projekt) => (
-      <li>
-        <a href={`/projekte/${projekt.id}`}>
-          <strong>{projekt.data.title}</strong>
-        </a>
-      </li>
-    ))}
-  </ul>
+  <div class="content-page">
+    <div class="container">
+      <h1>Unsere Projekte</h1>
+      <p class="lead">Solaranlagen in Bonstetten</p>
+      {projekte.length === 0 ? (
+        <p>Noch keine Projekte vorhanden.</p>
+      ) : (
+        <div class="article-grid">
+          {projekte.map((projekt, i) => (
+            <article class="news-card">
+              <div class={`card-image ${gradients[i % 3]}`}></div>
+              <div class="card-content">
+                <h3>{projekt.data.title}</h3>
+                <a href={`/projekte/${projekt.id}`} class="read-more">Mehr erfahren →</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
 </BaseLayout>

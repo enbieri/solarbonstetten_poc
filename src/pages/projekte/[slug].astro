@@ -14,9 +14,13 @@ const { projekt } = Astro.props;
 const { Content } = await render(projekt);
 ---
 <BaseLayout title={projekt.data.title}>
-  <article>
-    <h1>{projekt.data.title}</h1>
-    <Content />
-  </article>
-  <a href="/projekte">← Zurück zur Übersicht</a>
+  <div class="content-page">
+    <div class="container">
+      <h1>{projekt.data.title}</h1>
+      <div class="article-body">
+        <Content />
+      </div>
+      <a href="/projekte" class="back-link">← Zurück zur Übersicht</a>
+    </div>
+  </div>
 </BaseLayout>

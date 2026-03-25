@@ -14,13 +14,15 @@ const { article } = Astro.props;
 const { Content } = await render(article);
 ---
 <BaseLayout title={article.data.title}>
-  <article>
-    <h1>{article.data.title}</h1>
-    <time datetime={article.data.date.toISOString()}>
-      {article.data.date.toLocaleDateString('de-CH')}
-    </time>
-    {article.data.image && <img src={article.data.image} alt={article.data.title} />}
-    <Content />
-  </article>
-  <a href="/news">← Zurück zur Übersicht</a>
+  <div class="content-page">
+    <div class="container">
+      <span class="news-date">{article.data.date.toLocaleDateString('de-CH', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+      <h1>{article.data.title}</h1>
+      {article.data.image && <img src={article.data.image} alt={article.data.title} style="max-width:100%;border-radius:12px;margin:1.5rem 0;" />}
+      <div class="article-body">
+        <Content />
+      </div>
+      <a href="/news" class="back-link">← Zurück zur Übersicht</a>
+    </div>
+  </div>
 </BaseLayout>

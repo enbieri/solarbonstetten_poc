@@ -1,32 +1,98 @@
 ---
+import '../styles/global.css';
+
 interface Props {
   title: string;
   description?: string;
 }
-const { title, description } = Astro.props;
+const { title, description = 'Wir setzen uns dafür ein, mit Hilfe Privater die Mittel zur Verfügung zu stellen, um grosse Solaranlagen in Bonstetten zu bauen und lokal produzierten Strom im Dorf zu verkaufen.' } = Astro.props;
 ---
 <!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title} – Solarbonstetten</title>
-    {description && <meta name="description" content={description} />}
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title} | solarbonstetten</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
   <body>
-    <header>
-      <nav>
-        <a href="/">Start</a>
-        <a href="/news">News</a>
-        <a href="/projekte">Projekte</a>
-      </nav>
+
+    <header class="navbar" id="navbar">
+      <div class="nav-container">
+        <a href="/" class="logo-link">
+          <img src="/images/logo.png" alt="solarbonstetten Logo" class="logo" />
+        </a>
+        <nav class="nav-links">
+          <a href="/#aktuell" class="nav-item">Aktuell</a>
+          <a href="/#solaranlagen" class="nav-item">Solaranlagen</a>
+          <a href="/#verein" class="nav-item">Der Verein</a>
+          <a href="/#kontakt" class="nav-item">Kontakt</a>
+          <a href="/#shop" class="nav-item btn-outline">Shop</a>
+        </nav>
+        <button class="mobile-toggle" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </header>
-    <main>
-      <slot />
-    </main>
-    <footer>
-      <p>&copy; {new Date().getFullYear()} Solarbonstetten</p>
+
+    <slot />
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <img src="/images/logo.png" alt="solarbonstetten Logo" class="footer-logo" />
+          <p>Mit lokal produziertem Strom in eine nachhaltige und unabhängige Zukunft für Bonstetten.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="/#aktuell">Aktuell</a></li>
+            <li><a href="/news">News</a></li>
+            <li><a href="/projekte">Projekte</a></li>
+            <li><a href="/#verein">Der Verein</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Wichtiges</h4>
+          <ul>
+            <li><a href="#">Dokumente</a></li>
+            <li><a href="#">Statuten</a></li>
+            <li><a href="#">Datenschutz</a></li>
+            <li><a href="#">Impressum</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Kontakt</h4>
+          <p>solarbonstetten<br />8906 Bonstetten<br />Schweiz</p>
+          <a href="mailto:info@solarbonstetten.ch" class="mail-link">info@solarbonstetten.ch</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <p>&copy; {new Date().getFullYear()} Verein solarbonstetten. Alle Rechte vorbehalten.</p>
+        </div>
+      </div>
     </footer>
+
+    <script>
+      const navbar = document.getElementById('navbar')!;
+      window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.news-card, .list-icon').forEach(el => observer.observe(el));
+    </script>
   </body>
 </html>

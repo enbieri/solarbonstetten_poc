@@ -5,20 +5,29 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const articles = (await getCollection('news')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+const gradients = ['bg-gradient-1', 'bg-gradient-2', 'bg-gradient-3'];
 ---
 <BaseLayout title="News">
-  <h1>News</h1>
-  {articles.length === 0 && <p>Noch keine Artikel vorhanden.</p>}
-  <ul>
-    {articles.map((article) => (
-      <li>
-        <a href={`/news/${article.id}`}>
-          <strong>{article.data.title}</strong>
-        </a>
-        <time datetime={article.data.date.toISOString()}>
-          {article.data.date.toLocaleDateString('de-CH')}
-        </time>
-      </li>
-    ))}
-  </ul>
+  <div class="content-page">
+    <div class="container">
+      <h1>Aktuelles & News</h1>
+      <p class="lead">Was uns aktuell bewegt und beschäftigt</p>
+      {articles.length === 0 ? (
+        <p>Noch keine Artikel vorhanden.</p>
+      ) : (
+        <div class="article-grid">
+          {articles.map((article, i) => (
+            <article class="news-card">
+              <div class={`card-image ${gradients[i % 3]}`}></div>
+              <div class="card-content">
+                <span class="news-date">{article.data.date.toLocaleDateString('de-CH', { month: 'long', year: 'numeric' })}</span>
+                <h3>{article.data.title}</h3>
+                <a href={`/news/${article.id}`} class="read-more">Artikel lesen →</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
 </BaseLayout>
