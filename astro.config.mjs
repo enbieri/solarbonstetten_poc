@@ -19,6 +19,11 @@ export default defineConfig({
     display: 'swap',
   }],
 
+  prefetch: {
+    defaultStrategy: 'hover',
+    prefetchAll: true,
+  },
+
   build: {
     inlineStylesheets: 'always',
   },
