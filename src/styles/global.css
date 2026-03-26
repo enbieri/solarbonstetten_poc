@@ -160,14 +160,14 @@ ul { list-style: none; }
 /* ── Badge ───────────────────────────────────────────────────────────────── */
 .badge {
   display: inline-block;
-  background-color: rgba(245,158,11,0.1);
-  color: var(--color-primary-dark);
+  background-color: rgba(245,158,11,0.15);
+  color: #78350f; /* amber-900 – Kontrast ~8:1 auf hellem Hintergrund (WCAG AAA) */
   font-weight: 600;
   font-size: 0.85rem;
   padding: 0.5rem 1rem;
   border-radius: 20px;
   margin-bottom: 1.5rem;
-  border: 1px solid rgba(245,158,11,0.2);
+  border: 1px solid rgba(245,158,11,0.35);
 }
 
 /* ── Homepage-Widgets (Glass Cards) ─────────────────────────────────────── */
